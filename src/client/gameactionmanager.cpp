@@ -238,5 +238,5 @@ void GameActionManager::playWithCards()
 
 void GameActionManager::debug(const QString& msg)
 {
-    qDebug(qPrintable(QString("[Click]         %1").arg(msg)));
+    qDebug("[Click]         %s"), qPrintable(msg);
 }

@@ -43,8 +43,8 @@ public:
             m_current(current), m_expected(expected) {}
 
     virtual void debug() {
-        qDebug(qPrintable(QString("BadGamePlayStateException: expected %1 but current is %1.").arg(
-                gamePlayStateToString(m_expected)).arg(gamePlayStateToString(m_current))));
+        qDebug("BadGamePlayStateException: expected %s but current is %s.",
+                qPrintable(gamePlayStateToString(m_expected)), qPrintable(gamePlayStateToString(m_current)));
     }
     virtual ~BadGamePlayStateException() {}
 private:

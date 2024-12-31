@@ -23,6 +23,7 @@
 #include "config.h"
 
 #include <QPainter>
+#include <QPainterPath>
 #include <QFont>
 
 using namespace client;
@@ -251,6 +252,6 @@ QString Card::suitToColorString(CardSuit suit)
 void Card::loadPixmap()
 {
     if (!m_image.load(Config::dataPathString() + m_imageFileName)) {
-        qWarning(qPrintable(QString("Cannot load pixmap: %1").arg(Config::dataPathString() + m_imageFileName)));
+        qWarning("Cannot load pixmap: %s", qPrintable(Config::dataPathString() + m_imageFileName));
     }
 }

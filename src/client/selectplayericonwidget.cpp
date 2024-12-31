@@ -39,13 +39,13 @@ void SelectPlayerIconWidget::setImageFileName(QString fileName)
         return;
     }
     if (!QFile::exists(fileName)) {
-        qWarning(qPrintable(QString("Cannot load image file %1: file not found").arg(fileName)));
+        qWarning("Cannot load image file %s: file not found", qPrintable(fileName));
         clearImage();
         return;
     }
     QImage image;
     if (!image.load(fileName)) {
-        qWarning(qPrintable(QString("Cannot load image file %1: unknown format").arg(fileName)));
+        qWarning("Cannot load image file %s: unknown format", qPrintable(fileName));
         clearImage();
         return;
     }

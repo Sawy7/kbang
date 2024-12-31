@@ -112,7 +112,7 @@ void CardWidget::validate()
             qFatal("Cannot look-up the card!");
         }
         if (card->image().isNull()) {
-            qWarning(qPrintable(QString("Card '%1' has null pixmap.").arg(card->name())));
+            qWarning("Card '%s' has null pixmap.", qPrintable(card->name()));
         }
         if (m_cardType == Card::Playing && m_cardData.type != CARD_UNKNOWN) {
             setPixmap(card->image(m_cardData.suit, m_cardData.rank).

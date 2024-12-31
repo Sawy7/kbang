@@ -187,7 +187,7 @@ void Client::onActionPlayCard(const ActionPlayCardData& actionPlayCardData)
     qDebug("[CLIENT]   onActionPlayCard");
     PlayingCard* playedCard = mp_playerCtrl->privatePlayerView().card(actionPlayCardData.playedCardId);
     if (playedCard == 0) {
-        qDebug(qPrintable(QString("[CLIENT]   Card '%1' not found!").arg(actionPlayCardData.playedCardId)));
+        qDebug("[CLIENT]   Card '%1' not found!", actionPlayCardData.playedCardId);
         // @todo feedback
         return;
     }
@@ -206,7 +206,7 @@ void Client::onActionPlayCard(const ActionPlayCardData& actionPlayCardData)
                         mp_publicGameView->publicPlayerView(targetPlayerId);
 
                 if (targetPlayer == 0) {
-                    qDebug(qPrintable(QString("[CLIENT]   Target player '%1' not exist!").arg(actionPlayCardData.targetPlayerId)));
+                    qDebug("[CLIENT]   Target player '%1' not exist!", actionPlayCardData.targetPlayerId);
                     // @todo feedback
                     return;
                 }
@@ -216,7 +216,7 @@ void Client::onActionPlayCard(const ActionPlayCardData& actionPlayCardData)
             int targetCardId = actionPlayCardData.targetCardId;
             PlayingCard* card = mp_playerCtrl->card(targetCardId);
             if (card == 0) {
-                qDebug(qPrintable(QString("[CLIENT]   Target card '%1' not exist!").arg(targetCardId)));
+                qDebug("[CLIENT]   Target card '%1' not exist!", targetCardId);
                 // @todo feedback
                 return;
             }
@@ -809,7 +809,7 @@ PublicPlayerView* Client::getPlayer(int playerId)
 {
     PublicPlayerView* res = mp_publicGameView->publicPlayerView(playerId);
     if (res == 0)
-        qDebug(qPrintable(QString("[CLIENT]   Target player '%1' not exist!").arg(playerId)));
+        qDebug("[CLIENT]   Target player '%d' not exist!", playerId);
     return res;
 }
 
@@ -817,7 +817,7 @@ PlayingCard* Client::getCard(int cardId)
 {
     PlayingCard* card = mp_playerCtrl->card(cardId);
     if (card == 0) {
-        qDebug(qPrintable(QString("[CLIENT]   Target card '%1' not exist!").arg(cardId)));
+        qDebug("[CLIENT]   Target card '%d' not exist!", cardId);
     }
     return card;
 }

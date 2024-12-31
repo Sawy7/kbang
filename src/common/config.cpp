@@ -127,7 +127,7 @@ void Config::refresh()
 {
     QFile file(m_configFileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qCritical(qPrintable(QString("%1: cannot open config file for reading.").arg(m_configFileName)));
+        qCritical("%s: cannot open config file for reading.", qPrintable(m_configFileName));
         return;
     }    
     QTextStream in(&file);
@@ -156,7 +156,7 @@ void Config::refresh()
             currentGroup = &(m_groups[currentGroupName]);
         } else {
             if (currentGroupName.isEmpty()) {
-                qWarning(qPrintable(QString("%1: %2: line is not in group.").arg(m_configFileName, lineNum)));
+                qWarning("%s: %d: line is not in group.", qPrintable(m_configFileName), lineNum);
                 continue;
             }
             if (singleVarRegExp.exactMatch(line)) {
@@ -164,8 +164,8 @@ void Config::refresh()
                 QString varName = singleVarRegExp.capturedTexts()[1];
                 QString varValue = singleVarRegExp.capturedTexts()[2];
                 if (currentGroup->records.contains(varName)) {
-                    qWarning(qPrintable(QString("%1: %2: variable %3 already assigned.").arg(m_configFileName).
-                                        arg(lineNum).arg(varName)));
+                    qWarning("%s: %d: variable %s already assigned.", qPrintable(m_configFileName),
+                                        lineNum, qPrintable(varName));
                     continue;
                 }
                 currentGroup->records[varName] = ConfigRecord(varName, CONFIG_RECORD_SINGLE, varValue);
@@ -175,13 +175,13 @@ void Config::refresh()
                 if (!currentGroup->records.contains(varName)) {
                     currentGroup->records[varName] = ConfigRecord(varName, CONFIG_RECORD_LIST, QString());
                 } else if (currentGroup->records[varName].type != CONFIG_RECORD_LIST) {
-                    qWarning(qPrintable(QString("%1: %2: variable %3 is not list.").arg(m_configFileName).
-                                        arg(lineNum).arg(varName)));
+                    qWarning("%s: %d: variable %s is not list.", qPrintable(m_configFileName),
+                                        lineNum, qPrintable(varName));
                     continue;
                 }
                 currentGroup->records[varName].valueList.append(varValue);
             } else {
-                qWarning(qPrintable(QString("%1: %2: cannot parse line.").arg(m_configFileName).arg(lineNum)));
+                qWarning("%s: %d: cannot parse line.", qPrintable(m_configFileName), lineNum);
             }
         }
     }
@@ -191,7 +191,7 @@ void Config::store()
 {
     QFile file(m_configFileName);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qCritical(qPrintable(QString("%1: cannot open config file for writing.").arg(m_configFileName)));
+        qCritical("%s: cannot open config file for writing.", qPrintable(m_configFileName));
         return;
     }
     QTextStream out(&file);

@@ -205,7 +205,7 @@ void Game::removePlayer(Player* player)
         return;
     Q_ASSERT(m_playerMap.contains(playerId)); ///@todo examine this code
     Q_ASSERT(m_playerMap[playerId] == player);
-    qDebug(qPrintable(QString("Removing player #%1.").arg(playerId)));
+    qDebug("Removing player #%d.", playerId);
 
     if (player->isCreator() && m_state == GAMESTATE_WAITINGFORPLAYERS) {
         foreach(Player* p, m_playerList) {

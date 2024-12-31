@@ -1,0 +1,9 @@
+.qmake.stash
+Makefile*
+*.o
+*.a
+mocs/
+uics/
+rccs/
+kbang-client
+kbang-server
